@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bw8g0fyvyqqcj"]
+
+[ext_resource type="Script" path="res://ball_detector.gd" id="1_pk8g8"]
+[ext_resource type="PackedScene" uid="uid://6fqxgok43hvp" path="res://ball.tscn" id="2_cigur"]
+[ext_resource type="AudioStream" uid="uid://c3x2uhatj4rja" path="res://audio/death.wav" id="2_rybya"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pe0ww"]
+size = Vector2(21, 144)
+
+[node name="BallDetector" type="Area2D"]
+script = ExtResource("1_pk8g8")
+ball = ExtResource("2_cigur")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 1)
+shape = SubResource("RectangleShape2D_pe0ww")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_rybya")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

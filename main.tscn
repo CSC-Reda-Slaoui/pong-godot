@@ -1,0 +1,76 @@
+[gd_scene load_steps=7 format=3 uid="uid://cxk0b3i76c0vh"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_3nshk"]
+[ext_resource type="PackedScene" uid="uid://mwfe8ydw52g5" path="res://player1.tscn" id="1_tkmgd"]
+[ext_resource type="PackedScene" uid="uid://cneppxb4bxo28" path="res://player2.tscn" id="2_vrkoy"]
+[ext_resource type="PackedScene" uid="uid://6fqxgok43hvp" path="res://ball.tscn" id="3_yo3nx"]
+[ext_resource type="PackedScene" uid="uid://bw8g0fyvyqqcj" path="res://ball_detector.tscn" id="4_83dxf"]
+[ext_resource type="FontFile" uid="uid://ffdgarnwxmkw" path="res://BMSPA___.TTF" id="6_cmhal"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_3nshk")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -136.0
+offset_top = -152.0
+offset_right = 1484.0
+offset_bottom = 960.0
+color = Color(0, 0, 0, 1)
+
+[node name="Player" parent="." instance=ExtResource("1_tkmgd")]
+position = Vector2(1112, 384)
+scale = Vector2(10, 10)
+
+[node name="Player2" parent="." node_paths=PackedStringArray("ball") instance=ExtResource("2_vrkoy")]
+position = Vector2(40, 384)
+scale = Vector2(10, 10)
+ball = NodePath("../Ball")
+
+[node name="Ball" parent="." instance=ExtResource("3_yo3nx")]
+position = Vector2(576, 384)
+scale = Vector2(10, 10)
+
+[node name="BallDetector1" parent="." node_paths=PackedStringArray("player1", "player2") instance=ExtResource("4_83dxf")]
+position = Vector2(-95, 416)
+scale = Vector2(10, 10)
+player1 = NodePath("../Player2")
+player2 = NodePath("../Player")
+
+[node name="BallDetector2" parent="." node_paths=PackedStringArray("player1", "player2") instance=ExtResource("4_83dxf")]
+position = Vector2(1267, 385)
+scale = Vector2(10, 10)
+player1 = NodePath("../Player2")
+player2 = NodePath("../Player")
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = -179.0
+offset_top = 646.0
+offset_right = 1441.0
+offset_bottom = 751.0
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+offset_left = -155.0
+offset_top = -109.0
+offset_right = 1465.0
+offset_bottom = 1.0
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(576, -117)
+points = PackedVector2Array(0, 0, 0, 1000)
+width = 2.0
+
+[node name="Label" type="Label" parent="."]
+offset_left = 287.0
+offset_top = 80.0
+offset_right = 288.0
+offset_bottom = 131.0
+theme_override_fonts/font = ExtResource("6_cmhal")
+theme_override_font_sizes/font_size = 50
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 862.0
+offset_top = 80.0
+offset_right = 863.0
+offset_bottom = 131.0
+theme_override_fonts/font = ExtResource("6_cmhal")
+theme_override_font_sizes/font_size = 50
